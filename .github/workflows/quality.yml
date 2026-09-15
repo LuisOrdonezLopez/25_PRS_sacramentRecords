@@ -1,0 +1,54 @@
+name: PSW - pruebas y cobertura
+
+on:
+  push:
+    paths:
+      - "./**"
+  pull_request:
+    paths:
+      - "./**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-coverage:
+    name: ${{ matrix.module }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        module:
+          - vg-ms-sacramentrecords
+
+    defaults:
+      run:
+        working-directory: ${{ matrix.module }}
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17 y caché de Maven
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+          cache-dependency-path: ${{ matrix.module }}/pom.xml
+
+      - name: Dar permisos al Maven Wrapper
+        run: chmod +x mvnw
+
+      - name: Ejecutar pruebas unitarias, parametrizadas y JaCoCo
+        run: ./mvnw clean verify
+
+      - name: Publicar reporte de JaCoCo y pruebas
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-${{ matrix.module }}
+          path: |
+            ${{ matrix.module }}/target/site/jacoco
+            ${{ matrix.module }}/target/surefire-reports
+          if-no-files-found: error
