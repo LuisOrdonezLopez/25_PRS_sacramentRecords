@@ -29,6 +29,7 @@
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2024.0.1</spring-cloud.version>
+		<sonar.organization>luisordonezlopez</sonar.organization>
 		<sonar.projectKey>vg-ms-sacramentrecords</sonar.projectKey>
 		<sonar.projectName>VG MS Sacrament Records</sonar.projectName>
 		<sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
