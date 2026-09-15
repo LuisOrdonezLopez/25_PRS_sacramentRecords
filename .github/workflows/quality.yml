@@ -24,7 +24,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ${{ matrix.module }}
+        working-directory: ./
 
     steps:
       - name: Descargar código
@@ -49,6 +49,6 @@ jobs:
         with:
           name: quality-${{ matrix.module }}
           path: |
-            ${{ matrix.module }}/target/site/jacoco
-            ${{ matrix.module }}/target/surefire-reports
+            ./target/site/jacoco
+            ./target/surefire-reports
           if-no-files-found: error
