@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         module:
-          - "./"
+          - "25_PRS_sacramentRecords"
 
     defaults:
       run:
