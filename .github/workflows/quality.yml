@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         module:
-          - vg-ms-sacramentrecords
+          - 25_PRS_sacramentRecords
 
     defaults:
       run:
