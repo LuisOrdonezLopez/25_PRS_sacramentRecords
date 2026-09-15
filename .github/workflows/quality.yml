@@ -18,9 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      #matrix:
-        #module:
-          #- "25_PRS_sacramentRecords"
+      matrix:
+        module:
+          - "./"
 
     defaults:
       run:
