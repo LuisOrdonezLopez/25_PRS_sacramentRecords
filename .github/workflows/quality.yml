@@ -3,10 +3,10 @@ name: PSW - pruebas y cobertura
 on:
   push:
     paths:
-      - "./**"
+      - "**"
   pull_request:
     paths:
-      - "./**"
+      - "**"
   workflow_dispatch:
 
 permissions:
