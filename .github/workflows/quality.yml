@@ -36,7 +36,7 @@ jobs:
           distribution: temurin
           java-version: "17"
           cache: maven
-          cache-dependency-path: ${{ matrix.module }}/pom.xml
+          cache-dependency-path: ./pom.xml
 
       - name: Dar permisos al Maven Wrapper
         run: chmod +x mvnw
