@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: sacramentRecords # Ejemplos: sacramentservice, financeservice, communityservice, massservice
+
+  r2dbc:
+    url: ${SPRING_R2DBC_URL:r2dbc:postgresql://ep-twilight-union-acq1w3w7-pooler.sa-east-1.aws.neon.tech/neondb?sslMode=require} # Ej: r2dbc:postgresql://ep-xxx.us-east-1.aws.neon.tech/neondb?sslmode=require
+    username: ${SPRING_R2DBC_USERNAME:neondb_owner}         # Ej: neondb_owner
+    password: ${SPRING_R2DBC_PASSWORD:npg_aDfx9lMy2JOs}        # Tu contraseña de Neon DB
+    pool:
+      initial-size: 10
+      max-size: 20
+      max-idle-time: 30m
+
+  data:
+    r2dbc:
+      repositories:
+        enabled: true
+
+  # ─── Inicialización SQL ─────────────────────────────────────────────────────
+  sql:
+    init:
+      mode: ${SPRING_SQL_INIT_MODE:never}
+
+  # ─── OAuth2 Resource Server (Keycloak JWT) ───────────────────────────────────
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:https://lab.vallegrande.edu.pe/keycloak-security/realms/prs-realm}
+
+# ─── Eureka Client (Registro Dinámico) ────────────────────────────────────────
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
+    registerWithEureka: true
+    fetchRegistry: true
+  instance:
+    preferIpAddress: false
+    instanceId: ${spring.application.name}:${server.port}
+
+# ─── Logs de depuración para R2DBC ──────────────────────────────────────────
+logging:
+  level:
+    org.springframework.r2dbc: DEBUG
+    io.r2dbc.postgresql.QUERY: DEBUG
+    io.r2dbc.postgresql.PARAM: DEBUG
+
+# ─── Puerto del Microservicio ────────────────────────────────────────────────
+server:
+  port: 8095 # Ejemplos: 8083 (Sacraments), 8086 (Finance), 8090 (Community), 8091 (Mass)
+
+
