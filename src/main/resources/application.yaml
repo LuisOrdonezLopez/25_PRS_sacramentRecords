@@ -51,3 +51,4 @@ server:
   port: 8095 # Ejemplos: 8083 (Sacraments), 8086 (Finance), 8090 (Community), 8091 (Mass)
 
 
+# Comentario agregado para probar Sonar
